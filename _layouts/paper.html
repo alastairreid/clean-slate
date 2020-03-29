@@ -1,0 +1,79 @@
+---
+layout: default
+---
+
+<article class="biblio">
+  <center>
+    <h2>{{ page.title }}</h2>
+
+    {% for author in page.authors %}
+      {{author}}{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+
+    <br>
+    <a href="https://scholar.google.com/scholar?q={{ page.title | cgi_escape }}">[Google Scholar]</a>
+    <a href="https://dblp.org/search?q={{ page.title | cgi_escape }}">[DBLP]</a>
+    <a href="https://citeseer.ist.psu.edu/search?q={{ page.title | cgi_escape }}">[Citeseer]</a>
+    {% if page.doi %} <a href="https://doi.org/{{ page.doi }}">[doi]</a> {% endif %}
+    {% if page.link %} <a href="{{ page.link }}">[url]</a> {% endif %}
+
+    {% if page.readings %}
+        <br>Read:
+        {% for date in page.readings %}
+        {{ date | date_to_long_string }}
+        {% endfor %}
+    {% endif %}
+
+  </center>
+
+  <br>
+  <div style="margin-left:2em; margin-right:2em;">
+  {% if page.booktitle %}
+      {{ page.booktitle }}
+      <br>
+      {% if page.series %} {{ page.series }}{% if page.volume %}, volume {{ page.volume }} {% endif %} <br>
+      {% elsif page.volume %} Volume {{ page.volume }} {% if page.series %}, series {{ page.series }} {% endif %} <br>
+      {% endif %}
+  {% elsif page.journal %}
+      {{ page.journal }}
+      {{ page.volume }}({{ page.number }})<br>
+  {% endif %}
+  {% if page.location %} {{ page.location }}<br> {% endif %}
+  {{ page.month }}
+  {{ page.year }}
+
+  <br>Topic(s):
+  {% for topic in page.topics %}
+  <a href="{{site.baseurl}}/topics/{{ topic }}">{{topic}}</a>
+  {% endfor %}
+  </div>
+
+  <hr>
+
+  <div class="entry">
+    {{ content }}
+  </div>
+
+  <!--
+  <br>BibTeX:
+  <div style="font-family:'Lucida Console', monospace; font-size:smaller;">
+  @inproceedings{ {{ page.slug }},
+  <br>&nbsp; title = "{{ page.title }}",
+  <br>
+    authors = {
+        {% for author in page.authors %}
+          <br>&nbsp;&nbsp;
+          {{author}}{% unless forloop.last %} and{% endunless %}
+        {% endfor %}
+    <br> &nbsp;
+    },
+    <br>&nbsp; year  = "{{ page.year }}",
+    <br>&nbsp; month = "{{ page.month }}",
+    <br>&nbsp; doi   = "{{ page.doi }}",
+    <br>
+  }
+  </div>
+  -->
+
+  {% include disqus.html %}
+</article>

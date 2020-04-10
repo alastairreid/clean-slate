@@ -17,8 +17,8 @@ pages.
 
 <table class="papers">
 {% for paper in site.data.biblio %}
-    <tr valign="top">
-        <td align="right" class="bibtexnumber" style="padding: 3px;">
+    <tr style="text-align:top;">
+        <td class="bibtexnumber" style="text-align:right; padding: 3px;">
             <a class="papertitle" href="{{ site.baseurl }}/papers/{{ paper.ar_file }}">{{ paper.ar_shortname | replace:' ','&nbsp;'}}</a>
         </td>
         <td class="bibtexitem">
@@ -38,8 +38,8 @@ slides and video, etc.
 
 <table class="papers">
 {% for paper in site.data.patents %}
-    <tr valign="top">
-        <td align="right" class="bibtexnumber" style="padding: 3px;">
+    <tr style="text-align:top;">
+        <td class="bibtexnumber" style="text-align:right; padding: 3px;">
             {% if paper.link %}
                 <a class="papertitle" href="{{ paper.link }}">{{ paper.number | replace:' ','&nbsp;'}}</a>
             {% else %}

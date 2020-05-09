@@ -70,9 +70,22 @@ layout: default
   <a href="{{site.baseurl}}/topics/{{ topic }}">{{topic}}</a>
   {% endfor %}
   {% endif %}
-  </div>
 
-  <hr>
+  {% if page.notes %}
+  <br>Note(s):
+  {% for note in page.notes %}
+  <a href="{{site.baseurl}}/notes/{{ note | replace: ' ', '-' | downcase}}">{{note}}</a>{% if forloop.last %}{% else %},{% endif %}
+  {% endfor %}
+  {% endif %}
+
+  {% if page.papers %}
+  <br>Papers:
+  {% for p in page.papers %}
+  <a href="{{site.baseurl}}/summaries/{{p}}">{{p}}</a>{% if forloop.last %}{% else %},{% endif %}
+  {% endfor %}
+  {% endif %}
+
+  </div>
 
   <div class="entry">
     {{ content }}
